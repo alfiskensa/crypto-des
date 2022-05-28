@@ -183,19 +183,22 @@ public class Main {
             System.out.println("D0: "+hextoBin(key.substring(7, 14)));
             System.out.println();
             for (int i = 0; i < 16; i++) {
+            	System.out.println("Round "+(i+1));
             	String c = leftCircularShift(
                         key.substring(0, 7), shiftBits[i]);
             	String d = leftCircularShift(key.substring(7, 14),
                         shiftBits[i]);
-            	System.out.println("C"+(i+1)+": "+hextoBin(c));
-            	System.out.println("D"+(i+1)+": "+hextoBin(d));
+            	System.out.println("C"+(i+1)+": rotate(C"+i+","+(i+1)+") = "+hextoBin(c));
+            	System.out.println("D"+(i+1)+": rotate(D"+i+","+(i+1)+") = "+hextoBin(d));
                 key = leftCircularShift(
                           key.substring(0, 7), shiftBits[i])
                       + leftCircularShift(key.substring(7, 14),
                                           shiftBits[i]);
                 // second key permutation
+                System.out.println("Permutate key C"+(i+1)+"+D"+(i+1)+" with PC-2");
                 keys[i] = permutation(PC2, key);
                 System.out.println("K"+(i+1)+": "+hextoBin(keys[i]));
+                System.out.println();
             }
             System.out.println();
             return keys;
